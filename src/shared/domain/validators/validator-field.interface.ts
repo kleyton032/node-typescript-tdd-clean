@@ -5,5 +5,5 @@ export type FieldsError = {
 export interface ValidatorFieldsInterface<PropsValidated> {
   errors: FieldsError
   validatedData: PropsValidated
-  ValidationError(data: any): boolean
+  validate(data: any): boolean
 }
