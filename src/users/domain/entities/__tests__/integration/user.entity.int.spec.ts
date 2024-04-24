@@ -33,7 +33,6 @@ describe('UserEntity integration tests', () => {
       expect(() => new UserEntity(props)).toThrow(EntityValidationError)
     })
 
-
     it('Should throw an error when creating a user with invalid email', () => {
       let props: UserProps = {
         ...UserDataBuilder({}),
@@ -87,6 +86,21 @@ describe('UserEntity integration tests', () => {
       props = {
         ...UserDataBuilder({}),
         password: 'a'.repeat(101),
+      }
+
+      expect(() => new UserEntity(props)).toThrow(EntityValidationError)
+    })
+
+    it('Should throw an error when creating a user with invalid createdAt', () => {
+      let props: UserProps = {
+        ...UserDataBuilder({}),
+        createdAt: '2023' as any,
+      }
+      expect(() => new UserEntity(props)).toThrow(EntityValidationError)
+
+      props = {
+        ...UserDataBuilder({}),
+        name: 10 as any,
       }
 
       expect(() => new UserEntity(props)).toThrow(EntityValidationError)
