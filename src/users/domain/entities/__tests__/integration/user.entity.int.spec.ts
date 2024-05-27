@@ -136,4 +136,24 @@ describe('UserEntity integration tests', () => {
       entity.update('other name')
     })
   })
+
+  describe('UpadatePassword Method ', () => {
+    it('Should a invalid user using password field', () => {
+      const entity = new UserEntity(UserDataBuilder({}))
+      expect(() => entity.updatePassword(null)).toThrow(EntityValidationError)
+      expect(() => entity.updatePassword('')).toThrow(EntityValidationError)
+      expect(() => entity.updatePassword(10 as any)).toThrow(EntityValidationError)
+      expect(() => entity.updatePassword('a'.repeat(256))).toThrow(EntityValidationError)
+    })
+
+    it('Should a valid name', () => {
+      expect.assertions(0)
+
+      const props: UserProps = {
+        ...UserDataBuilder({})
+      }
+      const entity = new UserEntity(props)
+      entity.updatePassword('other password')
+    })
+  })
 })
